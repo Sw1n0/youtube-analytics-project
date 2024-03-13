@@ -12,11 +12,14 @@ load_dotenv("../.env")
 import isodate
 
 
-class Channel:
-    """Класс для ютуб-канала"""
+class Youtube:
+    """Класс родитель, который содержит в себе api_key и youtube"""
     api_key: str = os.getenv('YouTube-API')
     youtube = build('youtube', 'v3', developerKey=api_key)
 
+
+class Channel(Youtube):
+    """Класс для ютуб-канала"""
     def __init__(self, channel_id: str) -> None:
         """Экземпляр инициализируется id канала. Дальше все данные будут подтягиваться по API."""
         self.__channel_id = channel_id
